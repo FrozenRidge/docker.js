@@ -6,7 +6,6 @@ var host
 
 function listContainers(cb) {
   var url = resolve(host, "containers/ps")
-  console.log(host)
   request({url: url, json: true}, function(err, res, json) {
 
     if (err) return cb(err, null)

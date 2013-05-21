@@ -27,21 +27,14 @@ describe("docker.js", function() {
         },
       ]
 
-      before(function() {
-        var scope = nock(host).get('/containers/ps').
-          reply(200, containers)
-      })
-
-      after(function() {
-        nock.cleanAll()
-      })
-
       it("should list containers", function(done) {
+        var scope = nock(host).get('/containers/ps').reply(200, containers)
 
         function gotContainers(err, containers) {
           expect(err).to.be.null
           expect(containers).to.have.length(2)
-          expect(containers[0]).to.contain("Id", "Image", "Command", "Created", "status")
+          scope.done()
+          done()
         }
 
         docker().listContainers(gotContainers)
