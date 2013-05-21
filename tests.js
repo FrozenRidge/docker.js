@@ -8,6 +8,48 @@ describe("docker.js", function() {
 
   describe("#containers", function() {
 
+    describe("#createContainer", function() {
+
+      var opts = {
+        "Hostname":"",
+        "User":"",
+        "Memory":0,
+        "MemorySwap":0,
+        "AttachStdin":false,
+        "AttachStdout":true,
+        "AttachStderr":true,
+        "PortSpecs":null,
+        "Tty":false,
+        "OpenStdin":false,
+        "StdinOnce":false,
+        "Env":null,
+        "Cmd":[
+                "date"
+        ],
+        "Dns":null,
+        "Image":"base",
+        "Volumes":{},
+        "VolumesFrom":""
+      }
+
+      it("should create a new container", function(done) {
+
+        var res = {Id:"abcde", Warnings:[]}
+        var scope = nock(host).post('/containers/create').reply(200, res)
+
+        function handler(err, r) {
+
+          expect(err).to.be.null
+          expect(r).to.eql(res)
+          scope.done()
+          done()
+        }
+
+        docker().createContainer(opts, handler)
+
+      })
+    })
+
     describe("#listContainers", function() {
 
       var containers = [
@@ -46,7 +88,7 @@ describe("docker.js", function() {
 
         function gotContainers(err, c) {
           expect(err).to.exist
-          expect(c).to.be.null
+          expect(c).to.eql([])
           scope.done()
           done()
         }

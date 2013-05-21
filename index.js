@@ -11,11 +11,25 @@ function listContainers(cb) {
     if (err) return cb(err, null)
 
     if (res.statusCode !== 200) {
-      return cb("HTTP response code is " + res.statusCode + " not 200", null)
+      return cb("HTTP response code is " + res.statusCode + " not 200", json)
     }
 
     cb(null, json)
   })
+}
+
+function createContainer(opts, cb) {
+  var url = resolve(host, "containers/create")
+
+  request({url: url, json:opts, method:"POST"}, function(err, res, json) {
+    if (err) return cb(err, null)
+    if (res.statusCode !== 200) {
+      return cb("HTTP response code is " + res.statusCode + " not 200", json)
+    }
+
+    cb(null, json)
+  })
+
 }
 
 module.exports = function(opts) {
@@ -23,6 +37,7 @@ module.exports = function(opts) {
   host = "http://localhost:4243" || opts.host
 
   return {
+    createContainer: createContainer,
     listContainers: listContainers,
   }
 
