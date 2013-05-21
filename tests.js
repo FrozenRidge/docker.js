@@ -30,9 +30,9 @@ describe("docker.js", function() {
       it("should list containers", function(done) {
         var scope = nock(host).get('/containers/ps').reply(200, containers)
 
-        function gotContainers(err, containers) {
+        function gotContainers(err, c) {
           expect(err).to.be.null
-          expect(containers).to.have.length(2)
+          expect(c).to.eql(containers)
           scope.done()
           done()
         }
