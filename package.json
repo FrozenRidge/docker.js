@@ -1,0 +1,31 @@
+{
+  "name": "docker.js",
+  "version": "0.0.0",
+  "description": "wrapper for low-level docker.io http interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/FrozenRidge/docker.js.git"
+  },
+  "keywords": [
+    "docker",
+    "docker.io",
+    "lxc",
+    "container"
+  ],
+  "author": "Niall O'Higgins",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "07221a32f24cfee9232e1b00b7dbe44436f205ec",
+  "dependencies": {
+    "async": "~0.2.8",
+    "request": "~2.21.0"
+  },
+  "devDependencies": {
+    "chai": "~1.6.0",
+    "mocha": "~1.9.0"
+  }
+}
