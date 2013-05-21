@@ -41,6 +41,20 @@ describe("docker.js", function() {
 
       })
 
+      it("should error on non-200 from server", function(done) {
+        var scope = nock(host).get('/containers/ps').reply(500, [])
+
+        function gotContainers(err, c) {
+          expect(err).to.exist
+          expect(c).to.be.null
+          scope.done()
+          done()
+        }
+
+        docker().listContainers(gotContainers)
+
+      })
+
     })
 
   })
