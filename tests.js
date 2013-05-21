@@ -35,7 +35,7 @@ describe("docker.js", function() {
       it("should create a new container", function(done) {
 
         var res = {Id:"abcde", Warnings:[]}
-        var scope = nock(host).post('/containers/create').reply(200, res)
+        var scope = nock(host).post('/containers/create').reply(201, res)
 
         function handler(err, r) {
 
