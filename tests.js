@@ -40,7 +40,7 @@ describe("docker.js", function() {
         function handler(err, r) {
 
           expect(err).to.be.null
-          expect(r).to.eql(res)
+          expect(r).to.include.keys(['Id', 'Warnings'])
           scope.done()
           done()
         }
@@ -74,7 +74,9 @@ describe("docker.js", function() {
 
         function gotContainers(err, c) {
           expect(err).to.be.null
-          expect(c).to.eql(containers)
+          expect(c).to.have.length(2)
+          expect(c[0]).to.include.keys(Object.keys(containers[0]))
+          expect(c[1]).to.include.keys(Object.keys(containers[1]))
           scope.done()
           done()
         }
